@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"encoding/json"
@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/smtp"
-	"os"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -62,7 +61,7 @@ Additional Information: %s
 	)
 
 	from := "sohamxladftp@gmail.com"
-	password := os.Getenv("SMTP_PASSWORD") // Use environment variable for security
+	password := "twwt apln ubyx rtdz" // Use environment variable for security
 	smtpServer := "smtp.gmail.com"
 	smtpPort := "587"
 	to := "soham.lad16793@sakec.ac.in"

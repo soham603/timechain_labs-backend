@@ -70,15 +70,15 @@ Additional Information: %s
 		formData["skillLevel"],
 		formData["position"],
 		formData["budget"],
-		formData["additonalInfo"],
+		formData["additionalInfo"],
 	)
 
 	from := "sohamxladftp@gmail.com"
 	password := "twwt apln ubyx rtdz" // Replace this with your actual App Password
 	smtpServer := "smtp.gmail.com"
 	smtpPort := "587" // Port for sending emails using TLS
-	to := "deepali.chopra@timechainlabs.io"
-
+	//to := "deepali.chopra@timechainlabs.io"
+	to := "soham.lad16793@sakec.ac.in"
 	// Create authentication for sending the email
 	auth := smtp.PlainAuth("", from, password, smtpServer)
 

@@ -6,22 +6,10 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/smtp"
+	"os"
 )
 
-func main() {
-	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, World! This is your API response.")
-	})
-
-	http.HandleFunc("/submitForm", formDataAndEmail)
-
-	fmt.Println("Server is running on port 8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		fmt.Println("Error starting server:", err)
-	}
-}
-
-func formDataAndEmail(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -74,21 +62,17 @@ Additional Information: %s
 	)
 
 	from := "sohamxladftp@gmail.com"
-	password := "twwt apln ubyx rtdz" // Replace this with your actual App Password
+	password := os.Getenv("SMTP_PASSWORD") // Use environment variable for security
 	smtpServer := "smtp.gmail.com"
-	smtpPort := "587" // Port for sending emails using TLS
-	//to := "deepali.chopra@timechainlabs.io"
+	smtpPort := "587"
 	to := "soham.lad16793@sakec.ac.in"
-	// Create authentication for sending the email
 	auth := smtp.PlainAuth("", from, password, smtpServer)
 
-	// Prepare the email message
 	msg := []byte("To: " + to + "\r\n" +
 		"Subject: " + subject + "\r\n" +
 		"From: " + from + "\r\n" +
 		"\r\n" + emailBody)
 
-	// Send the email
 	err = smtp.SendMail(smtpServer+":"+smtpPort, auth, from, []string{to}, msg)
 	if err != nil {
 		fmt.Println("Error sending email:", err)
@@ -96,7 +80,6 @@ Additional Information: %s
 		return
 	}
 
-	// Log success and return a response
 	fmt.Println("Email sent successfully to:", to)
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(fmt.Sprintf("Form Data Received Successfully and Email Sent Successfully to %s", to)))

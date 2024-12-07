@@ -61,10 +61,10 @@ Additional Information: %s
 	)
 
 	from := "sohamxladftp@gmail.com"
-	password := "twwt apln ubyx rtdz" // Use environment variable for security
+	password := "twwt apln ubyx rtdz"
 	smtpServer := "smtp.gmail.com"
 	smtpPort := "587"
-	to := "soham.lad16793@sakec.ac.in"
+	to := "deepali.chopra@timechainlabs.io"
 	auth := smtp.PlainAuth("", from, password, smtpServer)
 
 	msg := []byte("To: " + to + "\r\n" +
